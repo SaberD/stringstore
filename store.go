@@ -13,8 +13,8 @@ type Store struct {
 	path string
 }
 
-// New starts the store at the file location
-// it will read any values already stored in the file
+// New starts the store at the file location.
+// It will read any values already stored in the file
 func New(path string) (*Store, error) {
 	var err error
 	out := Store{path: path}
@@ -25,8 +25,8 @@ func New(path string) (*Store, error) {
 	return &out, err
 }
 
-// Add adds the string to the store if not already stored.
-// Uses append to only write the new line to the file and not overwrite the whole file
+// Add adds the string to the store.
+// It uses append to only write the new line to the file and not overwrite the whole file
 func (this *Store) Add(filename string) error {
 	this.Lock()
 	defer this.Unlock()
@@ -43,9 +43,8 @@ func (this *Store) Add(filename string) error {
 	return err
 }
 
-// Pop removes the last line from the store and returns it.
-// Uses truncate to efficiently delete only last line and not overwrite the whole file.
-// Noop for empty store
+// Pop removes the last line from the store and returns it, returns an empty string if store is empty.
+// It uses truncate to efficiently delete only last line and not overwrite the whole file.
 func (this *Store) Pop() (string, error) {
 	var out string
 	this.Lock()
@@ -88,14 +87,13 @@ func getLastLine(file *os.File) (string, int64, error) {
 	if err != nil {
 		return out, 0, err
 	}
-	// if file is empty its a noop
+	// if file is empty return an empty string
 	if stat.Size() <= 0 {
 		return out, 0, nil
 	}
-	// Buffer to hold a single byte.
+
 	var text []byte
 	var offset int64
-
 	// Start from the end of the file.
 	for offset = stat.Size() - 1; offset >= 0; offset-- {
 		b := make([]byte, 1) // because of concurrency we need to make a new buffer each time
