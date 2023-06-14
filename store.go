@@ -117,9 +117,9 @@ func getLastLine(file *os.File) (string, int64, error) {
 		// Have to prepend the byte to the slice since we are reading the file backwards
 		text = append(b, text...)
 	}
-	if offset < 0 {
-		offset = 0
-	}
 	out = string(text)
-	return out, offset, nil
+	if offset < 0 {
+		return out, 0, nil
+	}
+	return out, offset + 1, nil
 }

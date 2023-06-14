@@ -62,10 +62,14 @@ import (
 
 func main() {
 	// Create a new string store instance
-	store := stringstore.New("/path/to/your/file")
+	store, err := stringstore.New("test.store")
+	if err != nil {
+		println(err)
+		return
+	}
 
-  // Store a string
-	err := store.Add("Store this message for later")
+	// Store a string
+	err = store.Add("Store this message for later")
 	if err != nil {
 		println(err)
 		return
@@ -78,7 +82,7 @@ func main() {
 		return
 	}
 
-	println("Retrieved value: ", line)
+	println("Retrieved value:", line)
 }
 ```
 
