@@ -1,6 +1,6 @@
 // Store stores a string as a line in a file
 // use Init(filename string) to set a store with the given filename
-package main
+package stringstore
 
 import (
 	"os"
