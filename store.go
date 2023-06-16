@@ -44,7 +44,7 @@ func (this *Store) Add(filename string) error {
 }
 
 // Pop removes the last line from the store and returns it, returns an empty string if store is empty.
-// It uses truncate to efficiently delete only last line and not overwrite the whole file.
+// It uses truncate to efficiently delete only the last line and not overwrite the whole file.
 func (this *Store) Pop() (string, error) {
 	var out string
 	this.Lock()
