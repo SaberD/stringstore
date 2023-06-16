@@ -1,5 +1,5 @@
-// Store stores a string as a line in a file
-// use Init(filename string) to set a store with the given filename
+// Store stores a string array as lines in a file.
+// Use New(filename string) to set a store with the given filename
 package stringstore
 
 import (
